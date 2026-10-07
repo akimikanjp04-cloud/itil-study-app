@@ -1,10 +1,10 @@
 // ==========================================
 // ITIL Foundation Study App
 // Service Worker
-// STEP 10 - PWA v2
+// STEP 11.5
 // ==========================================
 
-const CACHE_NAME = "itil-study-app-v3";
+const CACHE_NAME = "itil-study-app-v4";
 
 const APP_FILES = [
     "./",
@@ -24,83 +24,70 @@ const APP_FILES = [
 
 self.addEventListener("install", event => {
 
-    console.log(
-        "[Service Worker] Install"
-    );
-
     event.waitUntil(
-
         caches.open(CACHE_NAME)
             .then(cache => {
-
-                console.log(
-                    "[Service Worker] App files caching"
-                );
-
-                return cache.addAll(
-                    APP_FILES
-                );
+                return cache.addAll(APP_FILES);
             })
     );
 
+    // 新しいService Workerをすぐ待機状態から進める
     self.skipWaiting();
 });
 
 
 // ==========================================
 // 有効化
+// 古いキャッシュを削除
 // ==========================================
 
 self.addEventListener("activate", event => {
 
-    console.log(
-        "[Service Worker] Activate"
-    );
-
     event.waitUntil(
-
         caches.keys()
             .then(cacheNames => {
 
                 return Promise.all(
 
-                    cacheNames.map(
-                        cacheName => {
+                    cacheNames.map(cacheName => {
 
-                            if (
-                                cacheName !==
-                                CACHE_NAME
-                            ) {
-
-                                console.log(
-                                    "[Service Worker] Old cache delete:",
-                                    cacheName
-                                );
-
-                                return caches.delete(
-                                    cacheName
-                                );
-                            }
-
+                        if (cacheName !== CACHE_NAME) {
+                            return caches.delete(cacheName);
                         }
-                    )
-                );
 
+                    })
+
+                );
+            })
+            .then(() => {
+                return self.clients.claim();
             })
     );
-
-    self.clients.claim();
 });
 
 
 // ==========================================
-// Fetch
+// 通信処理
+//
+// オンライン：ネット最新版を優先
+// オフライン：キャッシュを使用
 // ==========================================
 
 self.addEventListener("fetch", event => {
 
+    // GET以外は処理しない
+    if (event.request.method !== "GET") {
+        return;
+    }
+
+
+    // http / https 以外は対象外
+    const requestURL =
+        new URL(event.request.url);
+
     if (
-        event.request.method !== "GET"
+        requestURL.protocol !== "http:" &&
+        requestURL.protocol !== "https:"
     ) {
         return;
     }
@@ -108,52 +95,44 @@ self.addEventListener("fetch", event => {
 
     event.respondWith(
 
-        caches.match(
-            event.request
-        )
-        .then(cachedResponse => {
+        fetch(event.request)
 
-            if (cachedResponse) {
-
-                return cachedResponse;
-            }
-
-
-            return fetch(
-                event.request
-            )
             .then(networkResponse => {
 
+                // 正常なレスポンスなら
+                // 新しい内容をキャッシュへ保存
                 if (
-                    !networkResponse ||
-                    networkResponse.status !== 200
+                    networkResponse &&
+                    networkResponse.status === 200
                 ) {
 
-                    return networkResponse;
+                    const responseClone =
+                        networkResponse.clone();
+
+                    caches.open(CACHE_NAME)
+                        .then(cache => {
+
+                            cache.put(
+                                event.request,
+                                responseClone
+                            );
+
+                        });
                 }
 
 
-                const responseClone =
-                    networkResponse.clone();
-
-
-                caches.open(
-                    CACHE_NAME
-                )
-                .then(cache => {
-
-                    cache.put(
-                        event.request,
-                        responseClone
-                    );
-
-                });
-
-
+                // ネットから取得した最新版を表示
                 return networkResponse;
+            })
 
-            });
+            .catch(() => {
 
-        })
+                // ネット接続できない場合は
+                // 保存済みキャッシュから表示
+                return caches.match(
+                    event.request
+                );
+
+            })
     );
 });
