@@ -1,0 +1,402 @@
+[
+  {
+    "id": "service",
+    "term": "サービス",
+    "english": "Service",
+    "category_id": "01",
+    "importance": 3,
+    "definition": "顧客が特定のコストやリスクを自ら管理せず、望む成果の達成を支援することで価値共創を可能にする手段。",
+    "exam_point": "価値・成果・コスト・リスクとの関係を押さえる。",
+    "related": []
+  },
+  {
+    "id": "value",
+    "term": "価値",
+    "english": "Value",
+    "category_id": "01",
+    "importance": 3,
+    "definition": "何かによって得られると認識される便益、有用性、重要性。",
+    "exam_point": "価値は関係者との相互作用の中で共創される。",
+    "related": []
+  },
+  {
+    "id": "outcome",
+    "term": "成果",
+    "english": "Outcome",
+    "category_id": "01",
+    "importance": 3,
+    "definition": "一つ以上のアウトプットによって可能になるステークホルダーにとっての結果。",
+    "exam_point": "アウトプットとの違いを意識する。",
+    "related": []
+  },
+  {
+    "id": "utility",
+    "term": "ユーティリティ",
+    "english": "Utility",
+    "category_id": "01",
+    "importance": 3,
+    "definition": "特定のニーズを満たすために製品またはサービスが提供する機能。",
+    "exam_point": "fit for purpose の観点。",
+    "related": []
+  },
+  {
+    "id": "warranty",
+    "term": "ワランティ",
+    "english": "Warranty",
+    "category_id": "01",
+    "importance": 3,
+    "definition": "製品またはサービスが合意された要件を満たすという保証。",
+    "exam_point": "fit for use の観点。",
+    "related": []
+  },
+  {
+    "id": "customer",
+    "term": "顧客",
+    "english": "Customer",
+    "category_id": "01",
+    "importance": 3,
+    "definition": "サービスの要件を定義し、サービス消費の成果に責任を持つ役割。",
+    "exam_point": "ユーザー、スポンサーとの違いを整理する。",
+    "related": []
+  },
+  {
+    "id": "user",
+    "term": "ユーザー",
+    "english": "User",
+    "category_id": "01",
+    "importance": 3,
+    "definition": "サービスを利用する役割。",
+    "exam_point": "顧客と同一人物とは限らない。",
+    "related": []
+  },
+  {
+    "id": "sponsor",
+    "term": "スポンサー",
+    "english": "Sponsor",
+    "category_id": "01",
+    "importance": 2,
+    "definition": "サービス消費の予算を承認する役割。",
+    "exam_point": "顧客・ユーザーとの役割差を押さえる。",
+    "related": []
+  },
+  {
+    "id": "stakeholder",
+    "term": "ステークホルダー",
+    "english": "Stakeholder",
+    "category_id": "01",
+    "importance": 2,
+    "definition": "組織、製品、サービスなどに利害関係を持つ人や組織。",
+    "exam_point": "顧客だけを意味しない。",
+    "related": []
+  },
+  {
+    "id": "org-people",
+    "term": "組織と人",
+    "english": "Organizations and People",
+    "category_id": "02",
+    "importance": 3,
+    "definition": "役割、責任、文化、能力、コミュニケーションなど人と組織に関するディメンション。",
+    "exam_point": "4つのディメンションの一つ。",
+    "related": []
+  },
+  {
+    "id": "info-tech",
+    "term": "情報とテクノロジー",
+    "english": "Information and Technology",
+    "category_id": "02",
+    "importance": 3,
+    "definition": "情報、知識、アプリケーション、技術基盤などに関するディメンション。",
+    "exam_point": "情報品質や技術適合性も考える。",
+    "related": []
+  },
+  {
+    "id": "partners",
+    "term": "パートナーとサプライヤー",
+    "english": "Partners and Suppliers",
+    "category_id": "02",
+    "importance": 3,
+    "definition": "外部組織との関係、契約、調達、依存関係などに関するディメンション。",
+    "exam_point": "外部能力の活用を含む。",
+    "related": []
+  },
+  {
+    "id": "streams-processes",
+    "term": "バリューストリームとプロセス",
+    "english": "Value Streams and Processes",
+    "category_id": "02",
+    "importance": 3,
+    "definition": "価値を生むための活動の流れ、手順、統制などに関するディメンション。",
+    "exam_point": "エンドツーエンドの流れを見る。",
+    "related": []
+  },
+  {
+    "id": "value-system",
+    "term": "ITIL Value System",
+    "english": "ITIL Value System",
+    "category_id": "03",
+    "importance": 3,
+    "definition": "機会や需要を価値へつなげるため、ITILの構成要素と活動が一体として働く仕組み。",
+    "exam_point": "Guiding Principles、ガバナンス、プラクティス、継続的改善などを結び付ける。",
+    "related": []
+  },
+  {
+    "id": "governance",
+    "term": "ガバナンス",
+    "english": "Governance",
+    "category_id": "03",
+    "importance": 3,
+    "definition": "組織を評価し、方向付けし、監視するための仕組み。",
+    "exam_point": "Value Systemの重要要素。",
+    "related": []
+  },
+  {
+    "id": "focus-value",
+    "term": "価値に着目する",
+    "english": "Focus on Value",
+    "category_id": "04",
+    "importance": 3,
+    "definition": "あらゆる活動をステークホルダーにとっての価値へ結び付ける原則。",
+    "exam_point": "誰にとって何が価値かを確認する。",
+    "related": []
+  },
+  {
+    "id": "start-where",
+    "term": "現状から始める",
+    "english": "Start Where You Are",
+    "category_id": "04",
+    "importance": 3,
+    "definition": "既存のサービス、方法、データを客観的に評価し、利用できるものを活かす原則。",
+    "exam_point": "ゼロから作り直す前に現状を評価する。",
+    "related": []
+  },
+  {
+    "id": "iterate",
+    "term": "フィードバックをもとに反復して進化する",
+    "english": "Progress Iteratively with Feedback",
+    "category_id": "04",
+    "importance": 3,
+    "definition": "作業を扱いやすい単位で進め、頻繁なフィードバックで学習・修正する原則。",
+    "exam_point": "大きな一括変更より学習サイクルを重視。",
+    "related": []
+  },
+  {
+    "id": "collaborate",
+    "term": "協働し、可視性を高める",
+    "english": "Collaborate and Promote Visibility",
+    "category_id": "04",
+    "importance": 3,
+    "definition": "適切な関係者が協力し、判断に必要な情報を見えるようにする原則。",
+    "exam_point": "全員への無制限公開という意味ではない。",
+    "related": []
+  },
+  {
+    "id": "holistic",
+    "term": "全体的に考え、取り組む",
+    "english": "Think and Work Holistically",
+    "category_id": "04",
+    "importance": 3,
+    "definition": "製品・サービスの構成要素や活動を相互関係のある全体として捉える原則。",
+    "exam_point": "部分最適による全体価値の低下を避ける。",
+    "related": []
+  },
+  {
+    "id": "simple",
+    "term": "シンプルにし、実用的にする",
+    "english": "Keep It Simple and Practical",
+    "category_id": "04",
+    "importance": 3,
+    "definition": "価値を生まない複雑さを減らし、目的達成に必要な最小限を選ぶ原則。",
+    "exam_point": "複雑さ自体を価値としない。",
+    "related": []
+  },
+  {
+    "id": "optimize",
+    "term": "最適化し、自動化する",
+    "english": "Optimize and Automate",
+    "category_id": "04",
+    "importance": 3,
+    "definition": "作業をまず有効に最適化し、その後適切な自動化を活用する原則。",
+    "exam_point": "非効率をそのまま自動化しない。",
+    "related": []
+  },
+  {
+    "id": "discover",
+    "term": "Discover",
+    "english": "Discover",
+    "category_id": "05",
+    "importance": 3,
+    "definition": "ニーズ、機会、問題、状況を理解し、方向性を見いだすライフサイクル活動。",
+    "exam_point": "8段階ライフサイクルの出発点。",
+    "related": []
+  },
+  {
+    "id": "design",
+    "term": "Design",
+    "english": "Design",
+    "category_id": "05",
+    "importance": 3,
+    "definition": "望ましい成果を実現する製品・サービスや体験を設計する活動。",
+    "exam_point": "後工程の運用・サポートも意識する。",
+    "related": []
+  },
+  {
+    "id": "acquire",
+    "term": "Acquire",
+    "english": "Acquire",
+    "category_id": "05",
+    "importance": 2,
+    "definition": "必要な外部製品、サービス、能力、資源などを取得する活動。",
+    "exam_point": "内製だけが選択肢ではない。",
+    "related": []
+  },
+  {
+    "id": "build",
+    "term": "Build",
+    "english": "Build",
+    "category_id": "05",
+    "importance": 3,
+    "definition": "設計に基づき必要な製品・サービス構成要素や能力を構築する活動。",
+    "exam_point": "品質を作り込む。",
+    "related": []
+  },
+  {
+    "id": "transition",
+    "term": "Transition",
+    "english": "Transition",
+    "category_id": "05",
+    "importance": 3,
+    "definition": "新規・変更された製品やサービスを利用可能な状態へ移行する活動。",
+    "exam_point": "リスクと準備状況を考える。",
+    "related": []
+  },
+  {
+    "id": "operate",
+    "term": "Operate",
+    "english": "Operate",
+    "category_id": "05",
+    "importance": 3,
+    "definition": "製品やサービスを安定的・効果的に運用する活動。",
+    "exam_point": "信頼性や可観測性も重要。",
+    "related": []
+  },
+  {
+    "id": "deliver",
+    "term": "Deliver",
+    "english": "Deliver",
+    "category_id": "05",
+    "importance": 3,
+    "definition": "サービスを利用者・顧客へ提供し、価値実現を可能にする活動。",
+    "exam_point": "提供と成果を結び付ける。",
+    "related": []
+  },
+  {
+    "id": "support",
+    "term": "Support",
+    "english": "Support",
+    "category_id": "05",
+    "importance": 3,
+    "definition": "利用者を支援し、問い合わせ、要求、問題への対応を助ける活動。",
+    "exam_point": "サポート情報は改善やDiscoverにも戻る。",
+    "related": []
+  },
+  {
+    "id": "incident",
+    "term": "インシデント管理",
+    "english": "Incident Management",
+    "category_id": "06",
+    "importance": 3,
+    "definition": "通常のサービス運用をできるだけ早く回復し、悪影響を最小化するためのプラクティス。",
+    "exam_point": "根本原因の追究は問題管理と区別する。",
+    "related": []
+  },
+  {
+    "id": "problem",
+    "term": "問題管理",
+    "english": "Problem Management",
+    "category_id": "06",
+    "importance": 3,
+    "definition": "インシデントの原因や潜在的原因を管理し、発生可能性や影響を減らすプラクティス。",
+    "exam_point": "インシデント管理との違いが重要。",
+    "related": []
+  },
+  {
+    "id": "change",
+    "term": "Change Enablement",
+    "english": "Change Enablement",
+    "category_id": "06",
+    "importance": 3,
+    "definition": "変更を評価・承認・スケジュールし、成功する変更を増やすためのプラクティス。",
+    "exam_point": "変更を禁止するためのものではない。",
+    "related": []
+  },
+  {
+    "id": "service-desk",
+    "term": "サービスデスク",
+    "english": "Service Desk",
+    "category_id": "06",
+    "importance": 3,
+    "definition": "ユーザーとサービスプロバイダの主要な連絡窓口として需要や問い合わせを受けるプラクティス。",
+    "exam_point": "コミュニケーション品質も重要。",
+    "related": []
+  },
+  {
+    "id": "service-request",
+    "term": "サービス要求管理",
+    "english": "Service Request Management",
+    "category_id": "06",
+    "importance": 2,
+    "definition": "事前定義されたユーザー起点のサービス要求を効果的に処理するプラクティス。",
+    "exam_point": "インシデントとの違いを押さえる。",
+    "related": []
+  },
+  {
+    "id": "monitor-event",
+    "term": "モニタリングおよびイベント管理",
+    "english": "Monitoring and Event Management",
+    "category_id": "06",
+    "importance": 2,
+    "definition": "サービスや構成要素を観測し、重要な状態変化を記録・管理するプラクティス。",
+    "exam_point": "異常の早期把握を支える。",
+    "related": []
+  },
+  {
+    "id": "continual-improvement",
+    "term": "継続的改善",
+    "english": "Continual Improvement",
+    "category_id": "07",
+    "importance": 3,
+    "definition": "製品、サービス、プラクティスなどを変化するニーズに合わせ継続して改善する考え方と活動。",
+    "exam_point": "一度限りではなく日常に組み込む。",
+    "related": []
+  },
+  {
+    "id": "improvement-backlog",
+    "term": "改善バックログ",
+    "english": "Improvement Backlog",
+    "category_id": "07",
+    "importance": 2,
+    "definition": "改善アイデアや機会を記録し、評価・優先順位付けするための一覧。",
+    "exam_point": "価値や実現性を踏まえて管理する。",
+    "related": []
+  },
+  {
+    "id": "value-stream",
+    "term": "バリューストリーム",
+    "english": "Value Stream",
+    "category_id": "08",
+    "importance": 3,
+    "definition": "特定の需要や機会に応えて価値を生み出すための一連の活動。",
+    "exam_point": "エンドツーエンドで捉える。",
+    "related": []
+  },
+  {
+    "id": "value-stream-mapping",
+    "term": "バリューストリームマッピング",
+    "english": "Value Stream Mapping",
+    "category_id": "08",
+    "importance": 3,
+    "definition": "価値の流れを可視化し、遅延、無駄、ボトルネック、改善機会を理解する手法。",
+    "exam_point": "現状と改善後の流れの理解に役立つ。",
+    "related": []
+  }
+]

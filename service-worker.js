@@ -4,7 +4,7 @@
 // STEP 11.5
 // ==========================================
 
-const CACHE_NAME = "itil-study-app-v4";
+const CACHE_NAME = "itil-study-app-v5";
 
 const APP_FILES = [
     "./",
@@ -12,6 +12,7 @@ const APP_FILES = [
     "./css/style.css",
     "./js/app.js",
     "./data/questions.json",
+    "./data/glossary.json",
     "./manifest.json",
     "./icons/icon-192.png",
     "./icons/icon-512.png"

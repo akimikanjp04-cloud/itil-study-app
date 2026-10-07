@@ -1778,6 +1778,7 @@ function hideAllScreens() {
         "category-screen",
         "quiz-screen",
         "mock-screen",
+        "glossary-screen",
         "stats-screen"
     ];
 
@@ -2698,4 +2699,89 @@ function showMockResult(
 
 
     window.scrollTo(0, 0);
+}
+
+// ==========================================
+// Version 1.0 用語集
+// ==========================================
+let glossaryTerms = [];
+
+async function loadGlossary() {
+    if (glossaryTerms.length > 0) return;
+    try {
+        const response = await fetch("data/glossary.json", { cache: "no-store" });
+        if (!response.ok) throw new Error("用語集データを読み込めませんでした。");
+        glossaryTerms = await response.json();
+    } catch (error) {
+        console.error(error);
+        alert("用語集データの読み込みに失敗しました。");
+    }
+}
+
+async function showGlossary() {
+    await loadGlossary();
+    hideAllScreens();
+    document.getElementById("glossary-screen").style.display = "block";
+
+    const select = document.getElementById("glossary-category");
+    if (select && select.options.length === 0) {
+        select.innerHTML = '<option value="">すべての分野</option>' +
+            CATEGORIES.map(c => `<option value="${c.id}">${c.name}</option>`).join("");
+    }
+    renderGlossary();
+    window.scrollTo(0, 0);
+}
+
+function escapeHTML(value) {
+    return String(value ?? "")
+        .replaceAll("&", "&amp;")
+        .replaceAll("<", "&lt;")
+        .replaceAll(">", "&gt;")
+        .replaceAll('"', "&quot;")
+        .replaceAll("'", "&#039;");
+}
+
+function renderGlossary() {
+    const list = document.getElementById("glossary-list");
+    if (!list) return;
+
+    const search = (document.getElementById("glossary-search")?.value || "").trim().toLowerCase();
+    const category = document.getElementById("glossary-category")?.value || "";
+    const importantOnly = document.getElementById("glossary-important")?.checked || false;
+
+    const filtered = glossaryTerms.filter(item => {
+        const haystack = `${item.term} ${item.english} ${item.definition} ${item.exam_point}`.toLowerCase();
+        return (!search || haystack.includes(search)) &&
+               (!category || item.category_id === category) &&
+               (!importantOnly || item.importance >= 3);
+    });
+
+    document.getElementById("glossary-count").textContent =
+        `${filtered.length} / ${glossaryTerms.length}語`;
+
+    if (filtered.length === 0) {
+        list.innerHTML = '<div class="empty-card">該当する用語がありません。</div>';
+        return;
+    }
+
+    list.innerHTML = filtered.map(item => {
+        const cat = CATEGORIES.find(c => c.id === item.category_id);
+        const stars = "★".repeat(item.importance) + "☆".repeat(Math.max(0, 3 - item.importance));
+        return `
+            <article class="glossary-card" id="term-${escapeHTML(item.id)}">
+                <div class="glossary-card-head">
+                    <div>
+                        <h2>${escapeHTML(item.term)}</h2>
+                        <div class="glossary-english">${escapeHTML(item.english)}</div>
+                    </div>
+                    <div class="glossary-stars">${stars}</div>
+                </div>
+                <div class="glossary-category-label">${escapeHTML(cat?.name || "")}</div>
+                <p>${escapeHTML(item.definition)}</p>
+                <div class="exam-point">
+                    <strong>試験ポイント</strong><br>
+                    ${escapeHTML(item.exam_point)}
+                </div>
+            </article>`;
+    }).join("");
 }

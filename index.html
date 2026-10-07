@@ -111,7 +111,7 @@
                 </span>
             </button>
 
-            <button class="menu-button">
+            <button class="menu-button" onclick="showGlossary()">
                 <span class="icon">📚</span>
 
                 <span>
@@ -175,6 +175,27 @@
         id="mock-screen"
         style="display:none;"
     ></section>
+
+
+    <!-- 用語集 -->
+    <section id="glossary-screen" style="display:none;">
+        <button class="back-button" onclick="goHome()">← ホーム</button>
+        <header class="sub-header">
+            <h1>📚 用語集</h1>
+            <p>重要用語を検索・復習</p>
+        </header>
+        <div class="glossary-tools">
+            <input id="glossary-search" class="glossary-search" type="search"
+                   placeholder="日本語・英語で検索" oninput="renderGlossary()">
+            <select id="glossary-category" class="glossary-select" onchange="renderGlossary()"></select>
+            <label class="glossary-check">
+                <input id="glossary-important" type="checkbox" onchange="renderGlossary()">
+                ★★★ 重要語だけ
+            </label>
+        </div>
+        <div id="glossary-count" class="glossary-count"></div>
+        <div id="glossary-list"></div>
+    </section>
 
 
     <!-- 学習成績 -->
