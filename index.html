@@ -2,7 +2,6 @@
 <html lang="ja">
 
 <head>
-
     <meta charset="UTF-8">
 
     <meta
@@ -20,11 +19,8 @@
         content="ITIL Foundationをスマートフォンで学習するための学習アプリ"
     >
 
-    <title>
-        ITIL Foundation 学習アプリ
-    </title>
+    <title>ITIL Foundation 学習アプリ</title>
 
-    <!-- PWA -->
     <link
         rel="manifest"
         href="manifest.json"
@@ -34,213 +30,120 @@
         rel="stylesheet"
         href="css/style.css"
     >
-
 </head>
-
 
 <body>
 
-
 <main class="app">
 
-
-    <!-- =========================
-         ホーム
-    ========================== -->
+    <!-- ホーム -->
 
     <section id="home-screen">
 
-
         <header class="header">
-
-            <h1>
-                ITIL Foundation
-            </h1>
-
-            <p>
-                学習アプリ
-            </p>
-
+            <h1>ITIL Foundation</h1>
+            <p>学習アプリ</p>
         </header>
-
 
         <section class="today-card">
 
-            <h2>
-                今日の学習
-            </h2>
+            <h2>今日の学習</h2>
 
             <div class="progress-text">
                 まだ学習していません
             </div>
 
             <div class="progress-bar">
-
-                <div class="progress-fill">
-                </div>
-
+                <div class="progress-fill"></div>
             </div>
 
         </section>
 
-
         <section class="menu">
-
 
             <button
                 class="menu-button"
                 onclick="showCategoryScreen()"
             >
-
-                <span class="icon">
-                    📖
-                </span>
+                <span class="icon">📖</span>
 
                 <span>
-
-                    <strong>
-                        分野別学習
-                    </strong>
-
-                    <small>
-                        テーマごとに学習する
-                    </small>
-
+                    <strong>分野別学習</strong>
+                    <small>テーマごとに学習する</small>
                 </span>
-
             </button>
-
 
             <button
                 class="menu-button"
                 onclick="startQuiz()"
             >
-
-                <span class="icon">
-                    ❓
-                </span>
+                <span class="icon">❓</span>
 
                 <span>
-
-                    <strong>
-                        一問一答
-                    </strong>
-
-                    <small>
-                        問題を解いて覚える
-                    </small>
-
+                    <strong>一問一答</strong>
+                    <small>問題を解いて覚える</small>
                 </span>
-
             </button>
-
 
             <button
                 class="menu-button"
                 onclick="startWeakQuiz()"
             >
-
-                <span class="icon">
-                    🔥
-                </span>
+                <span class="icon">🔥</span>
 
                 <span>
-
-                    <strong>
-                        苦手問題
-                    </strong>
-
+                    <strong>苦手問題</strong>
                     <small id="weak-summary">
                         間違えた問題を復習する
                     </small>
-
                 </span>
-
             </button>
 
-
-            <button class="menu-button">
-
-                <span class="icon">
-                    📝
-                </span>
+            <button
+                class="menu-button"
+                onclick="showMockExamIntro()"
+            >
+                <span class="icon">📝</span>
 
                 <span>
-
-                    <strong>
-                        模擬試験
-                    </strong>
-
-                    <small>
-                        40問・60分に挑戦
-                    </small>
-
+                    <strong>模擬試験</strong>
+                    <small>40問・60分の本番形式</small>
                 </span>
-
             </button>
-
 
             <button class="menu-button">
-
-                <span class="icon">
-                    📚
-                </span>
+                <span class="icon">📚</span>
 
                 <span>
-
-                    <strong>
-                        用語集
-                    </strong>
-
-                    <small>
-                        重要用語を確認する
-                    </small>
-
+                    <strong>用語集</strong>
+                    <small>重要用語を確認する</small>
                 </span>
-
             </button>
-
 
             <button
                 class="menu-button"
                 onclick="showStats()"
             >
-
-                <span class="icon">
-                    📊
-                </span>
+                <span class="icon">📊</span>
 
                 <span>
-
-                    <strong>
-                        学習成績
-                    </strong>
-
-                    <small>
-                        これまでの成績を見る
-                    </small>
-
+                    <strong>学習成績</strong>
+                    <small>これまでの成績を見る</small>
                 </span>
-
             </button>
-
 
         </section>
 
     </section>
 
 
-
-    <!-- =========================
-         分野別学習
-    ========================== -->
+    <!-- 分野別学習 -->
 
     <section
         id="category-screen"
         style="display:none;"
     >
 
-
         <button
             class="back-button"
             onclick="goHome()"
@@ -248,50 +151,39 @@
             ← ホーム
         </button>
 
-
         <header class="sub-header">
-
-            <h1>
-                📖 分野別学習
-            </h1>
-
-            <p>
-                学習する分野を選んでください
-            </p>
-
+            <h1>📖 分野別学習</h1>
+            <p>学習する分野を選んでください</p>
         </header>
 
-
-        <div id="category-list">
-        </div>
-
+        <div id="category-list"></div>
 
     </section>
 
 
-
-    <!-- =========================
-         問題画面
-    ========================== -->
+    <!-- 通常問題 -->
 
     <section
         id="quiz-screen"
         style="display:none;"
-    >
-    </section>
+    ></section>
 
 
+    <!-- 模擬試験 -->
 
-    <!-- =========================
-         学習成績
-    ========================== -->
+    <section
+        id="mock-screen"
+        style="display:none;"
+    ></section>
+
+
+    <!-- 学習成績 -->
 
     <section
         id="stats-screen"
         style="display:none;"
     >
 
-
         <button
             class="back-button"
             onclick="goHome()"
@@ -299,84 +191,47 @@
             ← ホーム
         </button>
 
-
         <header class="stats-header">
-
-            <h1>
-                📊 学習成績
-            </h1>
-
-            <p>
-                これまでの学習状況
-            </p>
-
+            <h1>📊 学習成績</h1>
+            <p>これまでの学習状況</p>
         </header>
 
-
-        <div id="stats-content">
-        </div>
-
+        <div id="stats-content"></div>
 
     </section>
-
 
 
     <footer>
         ITIL Foundation Study App
     </footer>
 
-
 </main>
 
 
-
-<!-- =========================
-     アプリ本体
-========================== -->
-
 <script src="js/app.js"></script>
 
-
-
-<!-- =========================
-     Service Worker
-========================== -->
-
 <script>
-
 if ("serviceWorker" in navigator) {
 
-    window.addEventListener(
-        "load",
-        () => {
+    window.addEventListener("load", () => {
 
-            navigator.serviceWorker
-                .register("./service-worker.js")
-
-                .then(registration => {
-
-                    console.log(
-                        "Service Worker registered:",
-                        registration.scope
-                    );
-
-                })
-
-                .catch(error => {
-
-                    console.error(
-                        "Service Worker registration failed:",
-                        error
-                    );
-
-                });
-        }
-    );
+        navigator.serviceWorker
+            .register("./service-worker.js")
+            .then(registration => {
+                console.log(
+                    "Service Worker registered:",
+                    registration.scope
+                );
+            })
+            .catch(error => {
+                console.error(
+                    "Service Worker registration failed:",
+                    error
+                );
+            });
+    });
 }
-
 </script>
 
-
 </body>
-
 </html>

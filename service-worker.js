@@ -4,7 +4,7 @@
 // STEP 10 - PWA v2
 // ==========================================
 
-const CACHE_NAME = "itil-study-app-v2";
+const CACHE_NAME = "itil-study-app-v3";
 
 const APP_FILES = [
     "./",

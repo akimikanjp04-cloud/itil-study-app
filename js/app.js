@@ -1777,6 +1777,7 @@ function hideAllScreens() {
         "home-screen",
         "category-screen",
         "quiz-screen",
+        "mock-screen",
         "stats-screen"
     ];
 
@@ -1838,3 +1839,863 @@ document.addEventListener(
         updateWeakSummary();
     }
 );
+// ==========================================
+// STEP 11
+// ITIL Foundation 模擬試験
+// ==========================================
+
+let mockQuestions = [];
+let mockAnswers = [];
+let mockCurrentQuestion = 0;
+
+let mockTimeRemaining = 60 * 60;
+let mockTimerId = null;
+
+let mockExamFinished = false;
+
+
+// ==========================================
+// 配列シャッフル
+// ==========================================
+
+function shuffleArray(array) {
+
+    const copy = [...array];
+
+    for (
+        let i = copy.length - 1;
+        i > 0;
+        i--
+    ) {
+
+        const j =
+            Math.floor(
+                Math.random() * (i + 1)
+            );
+
+        [
+            copy[i],
+            copy[j]
+        ] = [
+            copy[j],
+            copy[i]
+        ];
+    }
+
+    return copy;
+}
+
+
+// ==========================================
+// 模擬試験説明画面
+// ==========================================
+
+async function showMockExamIntro() {
+
+    if (questions.length === 0) {
+        await loadQuestions();
+    }
+
+    hideAllScreens();
+
+    const screen =
+        document.getElementById(
+            "mock-screen"
+        );
+
+    screen.style.display =
+        "block";
+
+
+    const isFullExam =
+        questions.length >= 40;
+
+
+    const examCount =
+        isFullExam
+        ? 40
+        : questions.length;
+
+
+    screen.innerHTML = `
+
+        <button
+            class="back-button"
+            onclick="goHome()"
+        >
+            ← ホーム
+        </button>
+
+
+        <div class="mock-intro">
+
+            <h1>
+                📝 模擬試験
+            </h1>
+
+
+            ${
+                isFullExam
+                ?
+                `
+                <div class="mock-info">
+
+                    <strong>
+                        本番形式
+                    </strong>
+
+                    <br><br>
+
+                    問題数：40問<br>
+                    制限時間：60分<br>
+                    合格基準：65%以上<br>
+                    形式：四択
+
+                </div>
+                `
+                :
+                `
+                <div class="mock-warning">
+
+                    <strong>
+                        ⚠ 開発テストモード
+                    </strong>
+
+                    <br><br>
+
+                    現在の問題数は
+                    ${questions.length}問です。
+
+                    <br><br>
+
+                    本番形式では40問必要ですが、
+                    現在は全${questions.length}問を使って
+                    模擬試験機能をテストします。
+
+                </div>
+                `
+            }
+
+
+            <p>
+                試験中は正解や解説を表示しません。
+            </p>
+
+            <p>
+                回答は途中で変更できます。
+            </p>
+
+            <p>
+                最後にまとめて採点し、
+                正解と解説を確認できます。
+            </p>
+
+
+            <div class="mock-info">
+
+                出題数：
+                <strong>${examCount}問</strong>
+
+                <br>
+
+                制限時間：
+                <strong>60分</strong>
+
+                <br>
+
+                合格基準：
+                <strong>65%</strong>
+
+            </div>
+
+
+            <button
+                class="mock-start-button"
+                onclick="startMockExam()"
+            >
+                模擬試験を開始
+            </button>
+
+        </div>
+    `;
+
+    window.scrollTo(0, 0);
+}
+
+
+// ==========================================
+// 模擬試験開始
+// ==========================================
+
+function startMockExam() {
+
+    if (questions.length === 0) {
+        return;
+    }
+
+
+    const shuffled =
+        shuffleArray(questions);
+
+
+    mockQuestions =
+        shuffled.slice(
+            0,
+            Math.min(
+                40,
+                shuffled.length
+            )
+        );
+
+
+    mockAnswers =
+        new Array(
+            mockQuestions.length
+        ).fill(null);
+
+
+    mockCurrentQuestion = 0;
+
+    mockTimeRemaining =
+        60 * 60;
+
+    mockExamFinished = false;
+
+
+    clearInterval(
+        mockTimerId
+    );
+
+
+    renderMockQuestion();
+
+    startMockTimer();
+}
+
+
+// ==========================================
+// タイマー
+// ==========================================
+
+function startMockTimer() {
+
+    updateMockTimer();
+
+
+    mockTimerId =
+        setInterval(
+            () => {
+
+                mockTimeRemaining--;
+
+
+                updateMockTimer();
+
+
+                if (
+                    mockTimeRemaining <= 0
+                ) {
+
+                    clearInterval(
+                        mockTimerId
+                    );
+
+                    alert(
+                        "制限時間になりました。\n自動的に採点します。"
+                    );
+
+                    finishMockExam(true);
+                }
+
+            },
+            1000
+        );
+}
+
+
+function updateMockTimer() {
+
+    const timer =
+        document.getElementById(
+            "mock-timer"
+        );
+
+
+    if (!timer) {
+        return;
+    }
+
+
+    const minutes =
+        Math.floor(
+            mockTimeRemaining / 60
+        );
+
+
+    const seconds =
+        mockTimeRemaining % 60;
+
+
+    timer.textContent =
+        `${String(minutes).padStart(2, "0")}:${String(seconds).padStart(2, "0")}`;
+}
+
+
+// ==========================================
+// 問題表示
+// ==========================================
+
+function renderMockQuestion() {
+
+    const screen =
+        document.getElementById(
+            "mock-screen"
+        );
+
+
+    screen.style.display =
+        "block";
+
+
+    const question =
+        mockQuestions[
+            mockCurrentQuestion
+        ];
+
+
+    const answeredCount =
+        mockAnswers.filter(
+            answer =>
+                answer !== null
+        ).length;
+
+
+    let choicesHTML = "";
+
+
+    question.choices.forEach(
+        (choice, index) => {
+
+            const selected =
+                mockAnswers[
+                    mockCurrentQuestion
+                ] === index;
+
+
+            choicesHTML += `
+
+                <button
+                    class="
+                        mock-choice
+                        ${selected ? "selected" : ""}
+                    "
+                    onclick="selectMockAnswer(${index})"
+                >
+
+                    ${String.fromCharCode(65 + index)}.
+                    ${choice}
+
+                </button>
+            `;
+        }
+    );
+
+
+    let numberHTML = "";
+
+
+    mockQuestions.forEach(
+        (item, index) => {
+
+            const answered =
+                mockAnswers[index] !== null;
+
+
+            const current =
+                index ===
+                mockCurrentQuestion;
+
+
+            numberHTML += `
+
+                <button
+                    class="
+                        mock-number-button
+                        ${answered ? "answered" : ""}
+                        ${current ? "current" : ""}
+                    "
+                    onclick="jumpMockQuestion(${index})"
+                >
+                    ${index + 1}
+                </button>
+            `;
+        }
+    );
+
+
+    screen.innerHTML = `
+
+        <div class="mock-header">
+
+            <div class="mock-header-top">
+
+                <strong>
+                    📝 模擬試験
+                </strong>
+
+                <div
+                    id="mock-timer"
+                    class="mock-timer"
+                >
+                    60:00
+                </div>
+
+            </div>
+
+
+            <div class="mock-progress">
+
+                問題
+                ${mockCurrentQuestion + 1}
+                /
+                ${mockQuestions.length}
+
+                ・
+
+                回答済み
+                ${answeredCount}
+                /
+                ${mockQuestions.length}
+
+            </div>
+
+        </div>
+
+
+        <div class="mock-question-card">
+
+            <div class="category">
+                ${question.category}
+            </div>
+
+            <h2>
+                ${question.question}
+            </h2>
+
+            <div>
+                ${choicesHTML}
+            </div>
+
+
+            <div class="mock-navigation">
+
+                <button
+                    class="mock-nav-button"
+                    onclick="previousMockQuestion()"
+                    ${
+                        mockCurrentQuestion === 0
+                        ? "disabled"
+                        : ""
+                    }
+                >
+                    ← 前へ
+                </button>
+
+
+                <button
+                    class="mock-nav-button"
+                    onclick="nextMockQuestion()"
+                    ${
+                        mockCurrentQuestion ===
+                        mockQuestions.length - 1
+                        ? "disabled"
+                        : ""
+                    }
+                >
+                    次へ →
+                </button>
+
+            </div>
+
+
+            <div class="mock-number-grid">
+                ${numberHTML}
+            </div>
+
+
+            <button
+                class="mock-submit-button"
+                onclick="confirmFinishMockExam()"
+            >
+                試験を終了して採点
+            </button>
+
+        </div>
+    `;
+
+
+    updateMockTimer();
+
+    window.scrollTo(0, 0);
+}
+
+
+// ==========================================
+// 回答
+// ==========================================
+
+function selectMockAnswer(
+    selectedIndex
+) {
+
+    mockAnswers[
+        mockCurrentQuestion
+    ] = selectedIndex;
+
+
+    renderMockQuestion();
+}
+
+
+// ==========================================
+// 前後移動
+// ==========================================
+
+function previousMockQuestion() {
+
+    if (
+        mockCurrentQuestion > 0
+    ) {
+
+        mockCurrentQuestion--;
+
+        renderMockQuestion();
+    }
+}
+
+
+function nextMockQuestion() {
+
+    if (
+        mockCurrentQuestion <
+        mockQuestions.length - 1
+    ) {
+
+        mockCurrentQuestion++;
+
+        renderMockQuestion();
+    }
+}
+
+
+function jumpMockQuestion(index) {
+
+    mockCurrentQuestion =
+        index;
+
+    renderMockQuestion();
+}
+
+
+// ==========================================
+// 終了確認
+// ==========================================
+
+function confirmFinishMockExam() {
+
+    const unanswered =
+        mockAnswers.filter(
+            answer =>
+                answer === null
+        ).length;
+
+
+    let message =
+        "模擬試験を終了して採点しますか？";
+
+
+    if (unanswered > 0) {
+
+        message =
+            `未回答が${unanswered}問あります。\n\nこのまま採点しますか？`;
+    }
+
+
+    if (
+        confirm(message)
+    ) {
+
+        finishMockExam(false);
+    }
+}
+
+
+// ==========================================
+// 採点
+// ==========================================
+
+function finishMockExam(
+    timeExpired = false
+) {
+
+    if (mockExamFinished) {
+        return;
+    }
+
+
+    mockExamFinished = true;
+
+
+    clearInterval(
+        mockTimerId
+    );
+
+
+    let correctCount = 0;
+
+
+    mockQuestions.forEach(
+        (question, index) => {
+
+            const selected =
+                mockAnswers[index];
+
+
+            const isCorrect =
+                selected ===
+                question.answer;
+
+
+            if (isCorrect) {
+                correctCount++;
+            }
+
+
+            // 未回答は学習履歴へ入れない
+            if (selected !== null) {
+
+                recordAnswer(
+                    question.id,
+                    isCorrect
+                );
+            }
+        }
+    );
+
+
+    const percentage =
+        Math.round(
+            correctCount /
+            mockQuestions.length *
+            100
+        );
+
+
+    const passed =
+        percentage >= 65;
+
+
+    showMockResult(
+        correctCount,
+        percentage,
+        passed,
+        timeExpired
+    );
+}
+
+
+// ==========================================
+// 結果
+// ==========================================
+
+function showMockResult(
+    correctCount,
+    percentage,
+    passed,
+    timeExpired
+) {
+
+    const screen =
+        document.getElementById(
+            "mock-screen"
+        );
+
+
+    let reviewHTML = "";
+
+
+    mockQuestions.forEach(
+        (question, index) => {
+
+            const selected =
+                mockAnswers[index];
+
+
+            const isCorrect =
+                selected ===
+                question.answer;
+
+
+            const selectedText =
+                selected === null
+                ?
+                "未回答"
+                :
+                `${String.fromCharCode(65 + selected)}. ${question.choices[selected]}`;
+
+
+            const correctText =
+                `${String.fromCharCode(65 + question.answer)}. ${question.choices[question.answer]}`;
+
+
+            reviewHTML += `
+
+                <div
+                    class="
+                        mock-review
+                        ${isCorrect ? "correct" : "wrong"}
+                    "
+                >
+
+                    <strong>
+                        問題 ${index + 1}
+                        ${isCorrect ? "⭕" : "❌"}
+                    </strong>
+
+
+                    <p>
+                        ${question.question}
+                    </p>
+
+
+                    <p>
+                        あなたの回答：
+                        <strong>
+                            ${selectedText}
+                        </strong>
+                    </p>
+
+
+                    <p>
+                        正解：
+                        <strong>
+                            ${correctText}
+                        </strong>
+                    </p>
+
+
+                    <p>
+                        <strong>解説</strong>
+                        <br>
+                        ${question.explanation}
+                    </p>
+
+                </div>
+            `;
+        }
+    );
+
+
+    screen.innerHTML = `
+
+        <div class="mock-result-card">
+
+            <h1>
+                📝 模擬試験結果
+            </h1>
+
+
+            ${
+                timeExpired
+                ?
+                `
+                <div class="mock-warning">
+                    ⏰ 制限時間終了により自動採点しました。
+                </div>
+                `
+                :
+                ""
+            }
+
+
+            <div class="mock-result-score">
+
+                ${correctCount}
+                /
+                ${mockQuestions.length}
+
+            </div>
+
+
+            <div class="${passed ? "mock-pass" : "mock-fail"}">
+
+                ${
+                    passed
+                    ? "合格ライン達成"
+                    : "合格ライン未達"
+                }
+
+            </div>
+
+
+            <p style="text-align:center;">
+
+                正答率
+                <strong>${percentage}%</strong>
+
+                <br>
+
+                合格基準 65%
+
+            </p>
+
+
+            ${
+                mockQuestions.length < 40
+                ?
+                `
+                <div class="mock-warning">
+
+                    現在は問題数が40問未満のため、
+                    開発テストモードです。
+
+                    <br>
+
+                    この結果は本番試験の合格予測には使用しません。
+
+                </div>
+                `
+                :
+                ""
+            }
+
+
+            <button
+                class="mock-start-button"
+                onclick="showMockExamIntro()"
+            >
+                もう一度挑戦
+            </button>
+
+
+            <button
+                class="home-button"
+                onclick="goHome()"
+            >
+                ホームへ戻る
+            </button>
+
+        </div>
+
+
+        <h2>
+            問題ごとの確認
+        </h2>
+
+
+        ${reviewHTML}
+    `;
+
+
+    window.scrollTo(0, 0);
+}
