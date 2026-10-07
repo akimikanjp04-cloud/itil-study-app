@@ -1,0 +1,12 @@
+{
+    "name": "ITIL Foundation 学習アプリ",
+    "short_name": "ITIL学習",
+    "description": "ITIL Foundationをスマートフォンで学習するためのオフライン対応学習アプリ",
+    "lang": "ja",
+    "start_url": "./",
+    "scope": "./",
+    "display": "standalone",
+    "orientation": "portrait",
+    "background_color": "#f3f6fa",
+    "theme_color": "#3478f6"
+}

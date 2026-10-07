@@ -1,0 +1,738 @@
+/* =========================
+   基本設定
+========================= */
+
+* {
+    box-sizing: border-box;
+}
+
+body {
+    margin: 0;
+
+    font-family:
+        -apple-system,
+        BlinkMacSystemFont,
+        "Segoe UI",
+        "Noto Sans JP",
+        sans-serif;
+
+    background: #f3f6fa;
+    color: #222;
+}
+
+button {
+    font-family: inherit;
+}
+
+.app {
+    width: 100%;
+    max-width: 520px;
+    min-height: 100vh;
+
+    margin: 0 auto;
+
+    padding: 20px 16px 40px;
+}
+
+
+/* =========================
+   ヘッダー
+========================= */
+
+.header,
+.sub-header,
+.stats-header {
+    text-align: center;
+    margin: 15px 0 25px;
+}
+
+.header h1,
+.sub-header h1,
+.stats-header h1 {
+    margin: 0;
+    font-size: 27px;
+}
+
+.header p,
+.sub-header p,
+.stats-header p {
+    margin: 6px 0 0;
+    color: #777;
+}
+
+
+/* =========================
+   今日の学習
+========================= */
+
+.today-card {
+    background: white;
+
+    padding: 20px;
+
+    border-radius: 16px;
+
+    box-shadow:
+        0 4px 15px
+        rgba(0,0,0,0.07);
+
+    margin-bottom: 22px;
+}
+
+.today-card h2 {
+    margin-top: 0;
+    font-size: 18px;
+}
+
+.progress-text {
+    color: #666;
+    font-size: 14px;
+    line-height: 1.7;
+
+    margin-bottom: 10px;
+}
+
+.total-progress {
+    color: #999;
+    font-size: 12px;
+}
+
+.progress-bar {
+    width: 100%;
+    height: 10px;
+
+    background: #e5e5e5;
+
+    border-radius: 10px;
+
+    overflow: hidden;
+}
+
+.progress-fill {
+    width: 0%;
+    height: 100%;
+
+    background: #3478f6;
+
+    transition: width 0.4s ease;
+}
+
+
+/* =========================
+   ホームメニュー
+========================= */
+
+.menu {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+}
+
+.menu-button {
+    width: 100%;
+
+    border: none;
+
+    background: white;
+
+    border-radius: 14px;
+
+    padding: 16px;
+
+    display: flex;
+    align-items: center;
+
+    gap: 16px;
+
+    text-align: left;
+
+    cursor: pointer;
+
+    box-shadow:
+        0 3px 12px
+        rgba(0,0,0,0.06);
+}
+
+.menu-button:active {
+    transform: scale(0.98);
+}
+
+.icon {
+    font-size: 30px;
+    width: 42px;
+
+    text-align: center;
+}
+
+.menu-button strong {
+    display: block;
+
+    font-size: 17px;
+
+    margin-bottom: 3px;
+}
+
+.menu-button small {
+    display: block;
+
+    color: #777;
+
+    font-size: 13px;
+}
+
+
+/* =========================
+   戻るボタン
+========================= */
+
+.back-button {
+    border: none;
+    background: none;
+
+    font-size: 15px;
+
+    padding: 10px 0;
+
+    cursor: pointer;
+}
+
+
+/* =========================
+   分野別学習
+========================= */
+
+.category-list-card {
+    background: white;
+
+    padding: 18px;
+
+    border-radius: 16px;
+
+    margin-bottom: 14px;
+
+    box-shadow:
+        0 4px 15px
+        rgba(0,0,0,0.07);
+}
+
+.category-number {
+    color: #3478f6;
+
+    font-size: 12px;
+
+    font-weight: bold;
+
+    margin-bottom: 4px;
+}
+
+.category-list-card h2 {
+    font-size: 18px;
+
+    margin:
+        0 0 12px;
+}
+
+.category-learning-info {
+    font-size: 13px;
+
+    color: #666;
+
+    line-height: 1.7;
+
+    margin-bottom: 10px;
+}
+
+.category-progress-bar {
+    width: 100%;
+    height: 8px;
+
+    background: #e8ebef;
+
+    border-radius: 10px;
+
+    overflow: hidden;
+
+    margin-bottom: 13px;
+}
+
+.category-progress-fill {
+    height: 100%;
+
+    background: #3478f6;
+
+    border-radius: 10px;
+}
+
+.category-start-button {
+    width: 100%;
+
+    border: none;
+
+    background: #3478f6;
+
+    color: white;
+
+    padding: 13px;
+
+    border-radius: 11px;
+
+    font-size: 15px;
+
+    font-weight: bold;
+
+    cursor: pointer;
+}
+
+.category-start-button:active {
+    transform: scale(0.99);
+}
+
+.category-start-button:disabled {
+    background: #d5d9df;
+
+    color: #777;
+
+    cursor: default;
+}
+
+.preparing-text {
+    color: #999;
+
+    font-size: 13px;
+
+    margin-bottom: 12px;
+}
+
+
+/* =========================
+   問題
+========================= */
+
+.quiz-header {
+    display: flex;
+
+    justify-content: space-between;
+
+    gap: 5px;
+
+    margin: 12px 0;
+
+    color: #666;
+
+    font-size: 13px;
+}
+
+.question-card {
+    background: white;
+
+    padding: 20px;
+
+    border-radius: 16px;
+
+    box-shadow:
+        0 4px 15px
+        rgba(0,0,0,0.07);
+}
+
+.category {
+    display: inline-block;
+
+    background: #eef4ff;
+
+    padding: 5px 10px;
+
+    border-radius: 20px;
+
+    font-size: 12px;
+
+    margin-bottom: 8px;
+}
+
+.question-card h2 {
+    font-size: 19px;
+
+    line-height: 1.6;
+}
+
+#choices {
+    display: flex;
+
+    flex-direction: column;
+
+    gap: 11px;
+
+    margin-top: 20px;
+}
+
+.choice-button {
+    width: 100%;
+
+    padding: 15px;
+
+    border:
+        2px solid #e2e6eb;
+
+    border-radius: 12px;
+
+    background: white;
+
+    text-align: left;
+
+    font-size: 15px;
+
+    line-height: 1.5;
+
+    cursor: pointer;
+}
+
+.choice-button:active {
+    transform: scale(0.99);
+}
+
+.choice-button:disabled {
+    color: #222;
+
+    opacity: 1;
+
+    cursor: default;
+}
+
+.choice-button.correct {
+    border-color: #24a148;
+
+    background: #eaf8ee;
+}
+
+.choice-button.wrong {
+    border-color: #d93025;
+
+    background: #fdeceb;
+}
+
+
+/* =========================
+   解説
+========================= */
+
+.result-box {
+    margin-top: 16px;
+
+    padding: 20px;
+
+    background: white;
+
+    border-radius: 16px;
+
+    box-shadow:
+        0 4px 15px
+        rgba(0,0,0,0.07);
+}
+
+.result-box h2 {
+    margin-top: 0;
+}
+
+.result-box p {
+    line-height: 1.7;
+}
+
+.wrong-reason {
+    padding: 12px;
+
+    background: #fff3f2;
+
+    border-radius: 10px;
+}
+
+
+/* =========================
+   共通ボタン
+========================= */
+
+.next-button {
+    width: 100%;
+
+    border: none;
+
+    background: #3478f6;
+
+    color: white;
+
+    padding: 15px;
+
+    border-radius: 12px;
+
+    font-size: 16px;
+
+    font-weight: bold;
+
+    cursor: pointer;
+
+    margin-top: 12px;
+}
+
+.home-button {
+    width: 100%;
+
+    border:
+        2px solid #3478f6;
+
+    background: white;
+
+    color: #3478f6;
+
+    padding: 14px;
+
+    border-radius: 12px;
+
+    font-size: 16px;
+
+    font-weight: bold;
+
+    cursor: pointer;
+
+    margin-top: 10px;
+}
+
+
+/* =========================
+   最終結果
+========================= */
+
+.final-result {
+    text-align: center;
+
+    background: white;
+
+    padding: 35px 20px;
+
+    border-radius: 18px;
+
+    margin-top: 30px;
+
+    box-shadow:
+        0 4px 15px
+        rgba(0,0,0,0.07);
+}
+
+.result-icon {
+    font-size: 50px;
+}
+
+.final-score {
+    font-size: 42px;
+
+    font-weight: bold;
+
+    margin:
+        20px 0 5px;
+}
+
+.percentage {
+    font-size: 20px;
+
+    color: #666;
+
+    margin-bottom: 20px;
+}
+
+
+/* =========================
+   学習成績
+========================= */
+
+.stats-card {
+    background: white;
+
+    padding: 20px;
+
+    border-radius: 16px;
+
+    margin-bottom: 15px;
+
+    box-shadow:
+        0 4px 15px
+        rgba(0,0,0,0.07);
+}
+
+.stats-card h2 {
+    margin-top: 0;
+
+    font-size: 18px;
+}
+
+.stats-big-row {
+    display: grid;
+
+    grid-template-columns:
+        repeat(3, 1fr);
+
+    gap: 8px;
+
+    text-align: center;
+}
+
+.stats-big-row div {
+    padding: 10px 4px;
+}
+
+.stats-big-row strong {
+    display: block;
+
+    font-size: 26px;
+}
+
+.stats-big-row span {
+    display: block;
+
+    color: #777;
+
+    font-size: 12px;
+
+    margin-top: 4px;
+}
+
+.category-stat {
+    margin: 18px 0;
+}
+
+.category-stat-top {
+    display: flex;
+
+    justify-content: space-between;
+
+    margin-bottom: 7px;
+}
+
+.stats-progress-bar {
+    width: 100%;
+    height: 9px;
+
+    background: #e8ebef;
+
+    border-radius: 10px;
+
+    overflow: hidden;
+
+    margin-bottom: 5px;
+}
+
+.stats-progress-fill {
+    height: 100%;
+
+    background: #3478f6;
+
+    border-radius: 10px;
+
+    transition:
+        width 0.4s ease;
+}
+
+.category-stat small {
+    color: #888;
+}
+
+.weak-stats-card {
+    text-align: center;
+}
+
+.weak-stats-card h2 {
+    text-align: left;
+}
+
+.weak-count {
+    font-size: 44px;
+
+    font-weight: bold;
+}
+
+.weak-count span {
+    font-size: 18px;
+
+    color: #777;
+}
+
+.weak-stats-card p {
+    color: #777;
+
+    font-size: 13px;
+}
+
+.recent-row {
+    display: grid;
+
+    grid-template-columns:
+        1fr 1fr 1fr;
+
+    padding: 11px 0;
+
+    border-bottom:
+        1px solid #eee;
+}
+
+.recent-row:last-child {
+    border-bottom: none;
+}
+
+.recent-row span:nth-child(2),
+.recent-row strong {
+    text-align: right;
+}
+
+.empty-message {
+    color: #888;
+
+    font-size: 14px;
+}
+
+
+/* =========================
+   フッター
+========================= */
+
+footer {
+    text-align: center;
+
+    color: #999;
+
+    font-size: 12px;
+
+    margin-top: 30px;
+}
+
+
+/* =========================
+   スマホ
+========================= */
+
+@media (max-width: 400px) {
+
+    .app {
+        padding:
+            14px 12px 30px;
+    }
+
+    .header h1,
+    .sub-header h1,
+    .stats-header h1 {
+        font-size: 24px;
+    }
+
+    .menu-button {
+        padding: 14px;
+    }
+
+    .question-card,
+    .stats-card,
+    .category-list-card {
+        padding: 17px;
+    }
+
+    .stats-big-row strong {
+        font-size: 23px;
+    }
+
+    .quiz-header {
+        font-size: 12px;
+    }
+}
