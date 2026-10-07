@@ -1,20 +1,20 @@
 // ==========================================
 // ITIL Foundation Study App
 // Service Worker
-// STEP 10
+// STEP 10 - PWA v2
 // ==========================================
 
-const CACHE_NAME = "itil-study-app-v1";
+const CACHE_NAME = "itil-study-app-v2";
 
-
-// オフラインでも使用したいファイル
 const APP_FILES = [
     "./",
     "./index.html",
     "./css/style.css",
     "./js/app.js",
     "./data/questions.json",
-    "./manifest.json"
+    "./manifest.json",
+    "./icons/icon-192.png",
+    "./icons/icon-512.png"
 ];
 
 
@@ -49,7 +49,6 @@ self.addEventListener("install", event => {
 
 // ==========================================
 // 有効化
-// 古いキャッシュを削除
 // ==========================================
 
 self.addEventListener("activate", event => {
@@ -82,9 +81,11 @@ self.addEventListener("activate", event => {
                                     cacheName
                                 );
                             }
+
                         }
                     )
                 );
+
             })
     );
 
@@ -93,12 +94,11 @@ self.addEventListener("activate", event => {
 
 
 // ==========================================
-// 通信処理
+// Fetch
 // ==========================================
 
 self.addEventListener("fetch", event => {
 
-    // GET以外は処理しない
     if (
         event.request.method !== "GET"
     ) {
@@ -113,23 +113,17 @@ self.addEventListener("fetch", event => {
         )
         .then(cachedResponse => {
 
-            // キャッシュがあれば
-            // オフラインでも返す
             if (cachedResponse) {
 
                 return cachedResponse;
             }
 
 
-            // キャッシュにない場合は
-            // ネットワークへ
             return fetch(
                 event.request
             )
             .then(networkResponse => {
 
-                // 正常なレスポンスだけ
-                // キャッシュへ追加
                 if (
                     !networkResponse ||
                     networkResponse.status !== 200
@@ -152,11 +146,14 @@ self.addEventListener("fetch", event => {
                         event.request,
                         responseClone
                     );
+
                 });
 
 
                 return networkResponse;
+
             });
+
         })
     );
 });
